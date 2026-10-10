@@ -1,0 +1,29 @@
+---
+import { testimonials } from '../../data/testimonials';
+import TestimonialCard from './TestimonialCard.astro';
+
+---
+
+<section class="bg-bg py-24" aria-labelledby="testimonials-heading">
+	<h2 id="testimonials-heading" data-reveal class="px-page m-0 mb-12 text-3xl font-bold">What Typists Say</h2>
+
+	<div
+		class="group overflow-x-auto motion-safe:overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+		role="region"
+		aria-label="Customer testimonials"
+	>
+		<div class="flex w-max motion-safe:animate-marquee motion-safe:group-hover:[animation-play-state:paused]">
+			{
+				[0, 1].map((copy) => (
+					<ul class="m-0 flex list-none p-0" aria-hidden={copy === 1 ? 'true' : undefined} class:list={[copy === 1 && 'motion-reduce:hidden']}>
+						{testimonials.map((t) => (
+							<li class="pr-6">
+								<TestimonialCard {...t} />
+							</li>
+						))}
+					</ul>
+				))
+			}
+		</div>
+	</div>
+</section>

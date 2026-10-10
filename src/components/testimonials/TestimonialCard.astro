@@ -1,0 +1,13 @@
+---
+import type { Testimonial } from "../../data/testimonials";
+
+const { quote, name, role } = Astro.props as Testimonial;
+---
+
+<figure class="m-0 flex h-full min-h-72 w-80 flex-col justify-between gap-10 rounded-3xl bg-[#434343] p-8 text-white sm:w-96">
+  <blockquote class="m-0 text-base leading-relaxed">“{quote}”</blockquote>
+  <figcaption class="text-sm">
+    <span class="block font-bold">{name}</span>
+    <span class="text-white/70">{role}</span>
+  </figcaption>
+</figure>

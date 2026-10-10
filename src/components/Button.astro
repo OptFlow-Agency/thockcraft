@@ -1,0 +1,26 @@
+---
+interface Props {
+	href: string;
+	variant?: 'primary' | 'secondary' | 'outline';
+}
+
+const { href, variant = 'primary' } = Astro.props;
+const styles = {
+	primary: 'bg-accent hover:bg-accent-hover border-transparent text-white',
+	outline: 'border-neutral-300 text-neutral-900 hover:border-neutral-900',
+	secondary: 'text-white border-white/20 hover:border-white/50 hover:bg-white/5',
+};
+---
+
+<a
+	href={href}
+	class:list={[
+		'group inline-flex items-center gap-2 rounded-lg border px-5 py-3 font-mono text-[0.85rem] font-bold transition-colors',
+		styles[variant],
+	]}
+>
+	<slot />
+	<svg class="transition-transform group-hover:translate-x-1" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+		<path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" />
+	</svg>
+</a>

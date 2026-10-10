@@ -1,0 +1,22 @@
+---
+import { FRAME, type AnatomyPart } from '../../data/anatomy';
+
+interface Props extends Pick<AnatomyPart, 'name' | 'description' | 'labelY'> {
+	/** Reveal step (0 = first to appear). Omit for static (mobile) lists. */
+	step?: number;
+}
+
+const { name, description, labelY, step } = Astro.props;
+const animated = step !== undefined;
+const style = animated
+	? `--y: ${(labelY / FRAME.height) * 100}%; opacity: var(--l${step}, 1); transform: translate3d(0, calc((1 - var(--l${step}, 1)) * 1rem), 0)`
+	: undefined;
+---
+
+<li
+	class:list={[animated && 'lg:absolute lg:top-(--y) lg:left-[64.5%] lg:w-[33%] lg:-translate-y-[0.8rem]']}
+	style={style}
+>
+	<h3 class="m-0 text-sm font-bold lg:text-base">{name}</h3>
+	<p class="m-0 mt-1 max-w-72 text-[0.7rem] leading-relaxed text-neutral-600 lg:max-w-none lg:text-xs">{description}</p>
+</li>

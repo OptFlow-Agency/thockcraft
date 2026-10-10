@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+import keyboard from "../../assets/keyboard.svg";
+---
+
+<div class="relative flex items-center justify-center md:-ml-[14%] md:justify-start">
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(closest-side,rgb(90_58_34/0.4),transparent)]"
+    aria-hidden="true"
+  ></div>
+  <div class="motion-safe:animate-hero-in relative w-full md:w-[135%] md:max-w-none">
+    <Image
+      src={keyboard}
+      alt="Walnut-framed mechanical keyboard with black keycaps"
+      width={1000}
+      loading="eager"
+      class="h-auto w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]"
+    />
+  </div>
+</div>

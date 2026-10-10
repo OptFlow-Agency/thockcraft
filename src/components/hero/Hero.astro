@@ -1,0 +1,28 @@
+---
+import HeroHeading from "./HeroHeading.astro";
+import HeroActions from "./HeroActions.astro";
+import TrustBar from "./TrustBar.astro";
+import HeroImage from "./HeroImage.astro";
+import ScrollCue from "./ScrollCue.astro";
+---
+
+<section class="px-page relative grid min-h-[calc(100svh-13rem)] grid-cols-1 items-center gap-8 overflow-x-clip pt-4 pb-4 md:grid-cols-2 md:gap-8">
+  <div class="relative z-10 flex flex-col items-start gap-8">
+    <HeroHeading />
+    <p
+      class="motion-safe:animate-fade-up m-0 max-w-[34rem] text-[0.95rem] leading-7 text-white/80"
+      style="animation-delay: 650ms"
+    >
+      Precision-engineered mechanical keyboards, custom switches, and premium
+      keycaps designed for everybody.
+    </p>
+    <div class="motion-safe:animate-fade-up" style="animation-delay: 800ms">
+      <HeroActions />
+    </div>
+    <div class="motion-safe:animate-fade-up" style="animation-delay: 950ms">
+      <TrustBar />
+    </div>
+  </div>
+  <HeroImage />
+  <ScrollCue />
+</section>

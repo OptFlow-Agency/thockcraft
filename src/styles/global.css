@@ -1,0 +1,131 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-bg: #1f1f1f;
+	--color-surface: #0c0c0f;
+	--color-muted: #b5b5b5;
+	--color-accent: #5a3a22;
+	--color-accent-hover: #6d4729;
+
+	--font-sans: 'Inter', system-ui, sans-serif;
+	--animate-float: float 6s ease-in-out infinite;
+	--animate-hero-in: hero-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0) rotate(0deg);
+		}
+		50% {
+			transform: translate3d(0, -14px, 0) rotate(-1deg);
+		}
+	}
+
+	@keyframes hero-in {
+		from {
+			opacity: 0;
+			transform: translate3d(45vw, 0, 0);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	--animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+	--animate-line-in: line-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+	--animate-marquee: marquee 70s linear infinite;
+	--animate-scroll-cue: scroll-cue 2s ease-in-out infinite;
+
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			transform: translate3d(0, 1.5rem, 0);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes line-in {
+		from {
+			transform: translate3d(0, 105%, 0);
+		}
+		to {
+			transform: none;
+		}
+	}
+
+	@keyframes marquee {
+		to {
+			transform: translate3d(-50%, 0, 0);
+		}
+	}
+
+	@keyframes scroll-cue {
+		0% {
+			transform: scaleY(0);
+			transform-origin: top;
+		}
+		50% {
+			transform: scaleY(1);
+			transform-origin: top;
+		}
+		51% {
+			transform-origin: bottom;
+		}
+		100% {
+			transform: scaleY(0);
+			transform-origin: bottom;
+		}
+	}
+
+	--color-accent-soft: #c9a27a;
+	--font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+@layer base {
+	::selection {
+		@apply bg-accent text-white;
+	}
+	html {
+		@apply bg-bg text-white;
+	}
+	body {
+		@apply min-h-screen font-mono antialiased;
+	}
+}
+
+@utility px-page {
+	padding-inline: max(2rem, calc((100% - 96rem) / 2));
+}
+
+/* Scroll reveal — only hidden when JS motion is active (see SmoothScroll.astro) */
+.js-motion [data-reveal] {
+	opacity: 0;
+	transform: translate3d(0, 2rem, 0);
+	transition:
+		opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+		transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+.js-motion [data-reveal].is-visible {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+/* Cinematic entrance: rises out of the dark, settling from soft focus to sharp */
+.js-motion [data-reveal][data-reveal-variant='cinematic'] {
+	transform: translate3d(0, 6rem, 0) scale(0.86);
+	filter: blur(18px) brightness(0.6);
+	transition:
+		opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+		filter 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-motion [data-reveal][data-reveal-variant='cinematic'].is-visible {
+	transform: none;
+	filter: none;
+}

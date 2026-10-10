@@ -1,0 +1,18 @@
+---
+import { features } from '../../data/features';
+---
+
+<section class="px-page bg-white pb-24 text-neutral-900" aria-labelledby="why-heading">
+	<h2 id="why-heading" data-reveal class="m-0 mb-12 text-3xl font-bold">Why Choose Us</h2>
+	<dl class="m-0 grid gap-x-16 gap-y-10 md:grid-cols-2">
+		{
+			features.map(({ title, description }, i) => (
+				<div class="border-t border-neutral-200 pt-6" data-reveal data-reveal-delay={(i % 2) * 120}>
+					<span class="text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>
+					<dt class="mt-2 text-lg font-bold">{title}</dt>
+					<dd class="m-0 mt-2 max-w-md text-sm leading-relaxed text-neutral-600">{description}</dd>
+				</div>
+			))
+		}
+	</dl>
+</section>

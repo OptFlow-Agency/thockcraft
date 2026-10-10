@@ -1,0 +1,19 @@
+---
+interface Props {
+	href: string;
+	dropdown?: boolean;
+}
+
+const { href, dropdown = false } = Astro.props;
+---
+
+<a href={href} class="relative whitespace-nowrap font-sans text-[0.95rem] font-medium hover:text-muted">
+	<slot />
+	{
+		dropdown && (
+			<svg class="absolute left-full top-full ml-2 mt-1" width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+				<path d="M1 1.5L8 8.5L15 1.5" stroke="currentColor" stroke-width="2" />
+			</svg>
+		)
+	}
+</a>

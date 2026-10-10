@@ -1,0 +1,20 @@
+---
+import { products } from '../../data/products';
+import Button from '../Button.astro';
+import ProductCard from './ProductCard.astro';
+---
+
+<section class="px-page bg-white py-24 text-neutral-900" aria-label="Products">
+	<div class="grid gap-6 md:grid-cols-2">
+		{
+			products.map((product, i) => (
+				<div class="h-full" data-reveal data-reveal-delay={(i % 2) * 120}>
+					<ProductCard product={product} />
+				</div>
+			))
+		}
+	</div>
+	<div class="mt-12 flex justify-center" data-reveal>
+		<Button href="/keyboards" variant="outline">See all</Button>
+	</div>
+</section>
