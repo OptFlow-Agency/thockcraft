@@ -3,7 +3,34 @@ import Logo from './Logo.astro';
 import Nav from './Nav.astro';
 ---
 
-<header class="px-page flex h-20 items-center justify-between">
+<header class="px-page relative z-40 flex h-20 items-center justify-between" data-header>
 	<Logo />
+	<button
+		type="button"
+		class="-mr-2 flex size-10 items-center justify-center md:hidden"
+		aria-label="Toggle menu"
+		aria-expanded="false"
+		aria-controls="main-nav"
+		data-nav-toggle
+	>
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+			<path class="[[aria-expanded=true]_&]:hidden" d="M4 7h16M4 12h16M4 17h16"></path>
+			<path class="hidden [[aria-expanded=true]_&]:block" d="M6 6l12 12M18 6L6 18"></path>
+		</svg>
+	</button>
 	<Nav />
 </header>
+
+<script>
+	const toggles = document.querySelectorAll<HTMLButtonElement>('[data-nav-toggle]');
+	const nav = document.getElementById('main-nav');
+
+	toggles.forEach((toggle) =>
+		toggle.addEventListener('click', () => {
+			if (!nav) return;
+			const open = nav.dataset.open !== 'true';
+			nav.dataset.open = String(open);
+			toggles.forEach((t) => t.setAttribute('aria-expanded', String(open)));
+		}),
+	);
+</script>

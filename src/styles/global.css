@@ -91,6 +91,7 @@
 	}
 	html {
 		@apply bg-bg text-white;
+		overflow-x: clip;
 	}
 	body {
 		@apply min-h-screen font-mono antialiased;

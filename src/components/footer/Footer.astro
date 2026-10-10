@@ -8,7 +8,7 @@ const focus =
   "rounded-sm focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-soft";
 ---
 
-<footer class="px-page relative min-h-176 overflow-hidden bg-[linear-gradient(180deg,#1d1d1d_0%,#0d0d0d_100%)] pt-16 pb-80 text-white sm:pb-72 lg:pb-64">
+<footer class="px-page relative overflow-hidden sm:min-h-176 bg-[linear-gradient(180deg,#1d1d1d_0%,#0d0d0d_100%)] pt-16 pb-24 text-white sm:pb-72 lg:pb-64">
   <div class="flex items-start justify-between gap-6">
     <a
       href="/"
@@ -68,7 +68,7 @@ const focus =
 
   <!-- Keyboard breaking out of the bottom-right corner -->
   <div
-    class="pointer-events-none absolute -right-[4%] -bottom-[8%] w-[min(52rem,78%)] sm:w-[min(52rem,52%)]"
+    class="pointer-events-none relative z-10 -mt-[32%] -mb-[40%] -mr-[45%] ml-auto w-[150%] sm:absolute sm:mt-0 sm:mb-0 sm:ml-0 sm:-right-[10%] sm:-bottom-[8%] sm:mr-0 sm:w-[min(52rem,20%)]"
     data-reveal
   >
     <Image

@@ -9,8 +9,20 @@ const links = [
 ];
 ---
 
-<nav aria-label="Main">
-  <ul class="m-0 flex list-none gap-7 p-0">
+<nav
+  id="main-nav"
+  aria-label="Main"
+  class="fixed inset-x-0 top-0 invisible [clip-path:inset(0_0_100%_0)] border-b border-white/10 bg-[#2e2e2e] px-8 pb-8 shadow-[0_24px_40px_rgba(0,0,0,0.6)] transition-[clip-path,visibility] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] data-[open=true]:visible data-[open=true]:[clip-path:inset(0_0_-3rem_0)] md:visible md:static md:[clip-path:none] md:border-0 md:bg-transparent md:p-0 md:shadow-none"
+>
+  <div class="-mx-0 mb-4 flex h-20 items-center justify-between md:hidden">
+    <a href="/" class="font-sans text-xl font-semibold tracking-tight">Thockcraft</a>
+    <button type="button" class="-mr-2 flex size-10 items-center justify-center" aria-label="Close menu" data-nav-toggle>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+  <ul class="m-0 flex list-none flex-col gap-5 p-0 md:flex-row md:gap-7">
     {links.map(({ label, href, dropdown }) => (
       <li>
         <NavLink href={href} dropdown={dropdown}>
