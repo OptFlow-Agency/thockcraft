@@ -14,12 +14,12 @@ export const products: Product[] = [
 		name: 'Nexus 75 (Wireless Gasket-Mount Keyboard)',
 		image: nexus,
 		alt: 'Nexus 75 keyboard in white and blue',
-		href: '/keyboards/nexus-75',
+		href: '#',
 	},
 	{
 		name: 'Phantom 60 (Ultra-Compact Enthusiast Board)',
 		image: phantom,
 		alt: 'Phantom 60 keyboard in black and tan',
-		href: '/keyboards/phantom-60',
+		href: '#',
 	},
 ];

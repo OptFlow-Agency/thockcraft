@@ -7,32 +7,32 @@ export const footerColumns: FooterColumn[] = [
 	{
 		title: 'Shop',
 		links: [
-			{ label: 'Keyboards', href: '/keyboards' },
-			{ label: 'Switches', href: '/switches' },
-			{ label: 'Keycaps', href: '/keycaps' },
-			{ label: 'Accessories', href: '/accessories' },
+			{ label: 'Keyboards', href: '#' },
+			{ label: 'Switches', href: '#' },
+			{ label: 'Keycaps', href: '#' },
+			{ label: 'Accessories', href: '#' },
 		],
 	},
 	{
 		title: 'Company',
 		links: [
-			{ label: 'About', href: '/about' },
-			{ label: 'Build Custom', href: '/custom' },
-			{ label: 'Journal', href: '/journal' },
+			{ label: 'About', href: '#' },
+			{ label: 'Build Custom', href: '#' },
+			{ label: 'Journal', href: '#' },
 		],
 	},
 	{
 		title: 'Support',
 		links: [
-			{ label: 'Shipping', href: '/shipping' },
-			{ label: 'Warranty', href: '/warranty' },
-			{ label: 'Returns', href: '/returns' },
-			{ label: 'Contact', href: '/contact' },
+			{ label: 'Shipping', href: '#' },
+			{ label: 'Warranty', href: '#' },
+			{ label: 'Returns', href: '#' },
+			{ label: 'Contact', href: '#' },
 		],
 	},
 ];
 
 export const legalLinks = [
-	{ label: 'Privacy', href: '/privacy' },
-	{ label: 'Terms', href: '/terms' },
+	{ label: 'Privacy', href: '#' },
+	{ label: 'Terms', href: '#' },
 ];
