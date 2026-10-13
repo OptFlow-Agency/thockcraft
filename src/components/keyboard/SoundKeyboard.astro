@@ -1,0 +1,74 @@
+---
+import KeyboardBoard from './KeyboardBoard.astro';
+import SwitchPicker from './SwitchPicker.astro';
+import { defaultThemeId, keycapThemes } from '../../data/keycapThemes';
+---
+
+<section class="px-page bg-surface relative py-24 text-white" id="switches" aria-label="Try the switches" data-sound-keyboard>
+	<div class="mx-auto max-w-4xl text-center" data-reveal>
+		<p class="text-accent-soft mb-4 text-xs tracking-[0.25em] uppercase">Try the switches</p>
+		<h2 class="font-sans text-4xl leading-tight font-semibold tracking-tight md:text-5xl">Hear it before you build it.</h2>
+		<p class="text-muted mt-5 text-base leading-relaxed">
+			Type on your keyboard or click the keys. Pick a switch and listen to how each one sounds.
+		</p>
+	</div>
+
+	<div class="mx-auto mt-14 grid max-w-5xl gap-10 lg:max-w-[88rem] lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start lg:gap-8 xl:grid-cols-[minmax(0,1fr)_21rem]">
+		<div class="min-w-0">
+			<div data-reveal data-stage>
+				<div data-board3d hidden class="aspect-[2.2] w-full" aria-hidden="true"></div>
+				<div data-board2d>
+					<KeyboardBoard />
+				</div>
+			</div>
+
+			<div class="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm">
+				<p class="text-muted m-0" data-status aria-live="polite"></p>
+				<div class="flex items-center gap-4">
+					<label class="flex items-center gap-3">
+						<span class="text-muted">Volume</span>
+						<input type="range" min="0" max="1" step="0.01" value="0.7" data-volume class="accent-accent-soft w-32" />
+					</label>
+					<button
+						type="button"
+						data-mute
+						aria-pressed="false"
+						class="hover:border-accent-soft focus-visible:ring-accent-soft cursor-pointer rounded-full border border-white/20 px-4 py-1.5 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+					>
+						Mute
+					</button>
+				</div>
+			</div>
+
+			<!-- Keycap colors only apply to the 3D board, so this stays hidden until it loads -->
+			<div class="mt-5 flex flex-wrap items-center gap-4 text-sm" data-themes hidden>
+				<span class="text-muted" id="keycap-label">Keycaps</span>
+				<div class="flex items-center gap-2" role="radiogroup" aria-labelledby="keycap-label">
+					{
+						keycapThemes.map((t) => (
+							<button
+								type="button"
+								role="radio"
+								data-theme={t.id}
+								aria-checked={t.id === defaultThemeId}
+								aria-label={t.name}
+								title={t.name}
+								class="focus-visible:ring-accent-soft h-8 w-8 cursor-pointer rounded-full border-2 border-transparent transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:outline-none aria-checked:border-white"
+								style={`background: linear-gradient(135deg, ${t.alpha.base} 0 50%, ${t.mod.base} 50% 100%)`}
+							/>
+						))
+					}
+				</div>
+			</div>
+		</div>
+
+		<SwitchPicker />
+	</div>
+</section>
+
+<script>
+	import { initSoundKeyboard } from './keyboard-engine';
+
+	const root = document.querySelector<HTMLElement>('[data-sound-keyboard]');
+	if (root) initSoundKeyboard(root);
+</script>
