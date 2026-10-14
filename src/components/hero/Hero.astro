@@ -17,8 +17,10 @@ import ScrollCue from "./ScrollCue.astro";
   </div>
 
   <div class="relative flex w-full flex-col items-center">
-  <HeroHeading />
-  <HeroImage />
+  <div class="flex w-fit max-w-full flex-col items-center">
+    <HeroHeading />
+    <HeroImage />
+  </div>
 
   <div class="relative z-10 mt-12 flex w-full flex-col gap-10 md:absolute md:inset-x-[max(2rem,calc((100%-96rem)/2))] md:top-[19vw] md:mt-0 md:w-auto md:flex-row md:items-start md:justify-between">
     <div class="motion-safe:animate-fade-up max-w-60 text-xs leading-6 tracking-widest text-fg/80 uppercase" style="animation-delay: 1050ms">
