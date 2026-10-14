@@ -10,7 +10,7 @@ interface Props {
 const { title, description = 'Precision-engineered mechanical keyboards, custom switches, and premium keycaps.' } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -26,9 +26,9 @@ const { title, description = 'Precision-engineered mechanical keyboards, custom 
 		/>
 		<script is:inline>
 			try {
-				document.documentElement.dataset.theme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+				document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
 			} catch {
-				document.documentElement.dataset.theme = 'dark';
+				document.documentElement.dataset.theme = 'light';
 			}
 		</script>
 		<title>{title}</title>

@@ -131,7 +131,7 @@
 /* Second section and switch tester: light grey in light mode instead of the dark cinematic look */
 :root[data-theme='light'] .cinematic,
 :root[data-theme='light'] .switch-lab {
-	background: #cdcdcb;
+	background: #e6e6e6;
 	--color-ink: #14191f;
 	--color-fg: #14191f;
 	--color-muted: #5f594b;
@@ -139,6 +139,15 @@
 	--color-accent-soft: #12181e;
 	--color-accent: #12181e;
 	--color-accent-hover: #232c35;
+}
+:root[data-theme='light'] .switch-card {
+	background: #ffffff;
+}
+:root[data-theme='light'] .switch-card:hover {
+	background: #fafafa;
+}
+:root[data-theme='light'] input:checked + .switch-card {
+	background: #ffffff;
 }
 :root[data-theme='light'] .cin-overlay {
 	display: none;

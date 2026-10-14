@@ -8,7 +8,7 @@ import { defaultSwitchId, switches } from '../../data/switches';
 		switches.map((s, i) => (
 			<label class="block cursor-pointer" data-reveal data-reveal-delay={i * 70}>
 				<input type="radio" name="switch" value={s.id} checked={s.id === defaultSwitchId} class="peer sr-only" />
-				<span class="flex h-full gap-4 rounded-xl border border-ink/10 bg-ink/[0.03] p-4 transition-colors hover:bg-ink/[0.06] peer-checked:border-accent-soft peer-checked:bg-ink/[0.08] peer-focus-visible:ring-2 peer-focus-visible:ring-accent-soft">
+				<span class="switch-card flex h-full gap-4 rounded-xl border border-ink/10 bg-ink/[0.03] p-4 transition-colors hover:bg-ink/[0.06] peer-checked:border-accent-soft peer-checked:bg-ink/[0.08] peer-focus-visible:ring-2 peer-focus-visible:ring-accent-soft">
 					<span class="mt-0.5 h-10 w-2 shrink-0 rounded-full" style={`background: ${s.color}`} aria-hidden="true" />
 					<span class="flex flex-col gap-1">
 						<span class="flex items-center gap-2">
