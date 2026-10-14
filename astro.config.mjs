@@ -6,5 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
+		optimizeDeps: {
+			include: ['three', 'three/examples/jsm/loaders/GLTFLoader.js', 'three/examples/jsm/environments/RoomEnvironment.js'],
+		},
 	},
 });

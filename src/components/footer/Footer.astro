@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import { footerColumns, legalLinks } from "../../data/footer";
-// Stand-in product shot — swap for the final footer keyboard image
 import keyboard from "../../assets/ess-keyboard.svg";
 
 const focus =
-  "rounded-sm focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-soft";
+  "rounded-sm focus-visible:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-soft";
 ---
 
-<footer class="px-page relative overflow-hidden sm:min-h-176 bg-[linear-gradient(180deg,#1d1d1d_0%,#0d0d0d_100%)] pt-16 pb-24 text-white sm:pb-72 lg:pb-64">
+<footer class="force-dark px-page relative overflow-hidden sm:min-h-176 bg-[linear-gradient(180deg,#14191f_0%,#070c13_100%)] pt-16 pb-24 text-ink sm:pb-72 lg:pb-64">
+
   <div class="flex items-start justify-between gap-6">
     <a
       href="/"
@@ -19,12 +19,22 @@ const focus =
     >
       Thockcraft
     </a>
-    <p class="m-0 hidden text-xs text-white/50 sm:block">
-      &copy; {new Date().getFullYear()} Thockcraft
-    </p>
+    <ul class="m-0 hidden list-none items-center gap-6 p-0 text-xs text-ink/50 sm:flex">
+      <li>&copy; {new Date().getFullYear()} Thockcraft</li>
+      {legalLinks.map(({ label, href }) => (
+        <li>
+          <a href={href} class:list={["hover:text-ink", focus]}>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
+  <p class="m-0 mt-5 max-w-sm text-sm leading-6 text-ink/55">
+    Mechanical keyboards, switches and keycaps for people who love the sound and feel of a good keystroke.
+  </p>
 
-  <div class="mt-14 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3">
+  <div class="mt-12 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3">
     {footerColumns.map(({ title, links }) => (
       <nav aria-label={title}>
         <h3 class="m-0 mb-6 text-base font-bold">{title}</h3>
@@ -34,7 +44,7 @@ const focus =
               <a
                 href={href}
                 class:list={[
-                  "text-base text-white/55 transition-colors hover:text-white",
+                  "text-base text-ink/55 transition-colors hover:text-ink",
                   focus,
                 ]}
               >
@@ -47,11 +57,11 @@ const focus =
     ))}
   </div>
 
-  <ul class="m-0 mt-12 flex list-none gap-6 p-0 text-xs text-white/50 sm:hidden">
+  <ul class="m-0 mt-12 flex list-none gap-6 p-0 text-xs text-ink/50 sm:hidden">
     <li>&copy; {new Date().getFullYear()} Thockcraft</li>
     {legalLinks.map(({ label, href }) => (
       <li>
-        <a href={href} class:list={["hover:text-white", focus]}>
+        <a href={href} class:list={["hover:text-ink", focus]}>
           {label}
         </a>
       </li>
@@ -60,7 +70,7 @@ const focus =
 
   <!-- Cropped watermark -->
   <span
-    class="pointer-events-none absolute bottom-0 left-[max(2rem,calc((100%-96rem)/2))] block translate-y-[28%] font-mono text-[clamp(5rem,15vw,15rem)] leading-none font-bold tracking-tight text-white/[0.04] select-none"
+    class="pointer-events-none absolute bottom-0 left-[max(2rem,calc((100%-96rem)/2))] block translate-y-[28%] font-mono text-[clamp(5rem,15vw,15rem)] leading-none font-bold tracking-tight text-ink/[0.04] select-none"
     aria-hidden="true"
   >
     Thockcraft
@@ -68,7 +78,7 @@ const focus =
 
   <!-- Keyboard breaking out of the bottom-right corner -->
   <div
-    class="pointer-events-none relative z-10 -mt-[32%] -mb-[40%] -mr-[45%] ml-auto w-[150%] sm:absolute sm:mt-0 sm:mb-0 sm:ml-0 sm:-right-[6%] sm:-bottom-[10%] sm:mr-0 sm:w-[clamp(20rem,38vw,56rem)]"
+    class="pointer-events-none relative z-10 mt-10 -mb-[6%] -mr-[30%] ml-auto w-[125%] sm:absolute sm:mt-0 sm:mb-0 sm:ml-0 sm:-right-[6%] sm:-bottom-[10%] sm:mr-0 sm:w-[clamp(22rem,46vw,64rem)] lg:w-[clamp(36rem,46vw,76rem)]"
     data-reveal
   >
     <Image

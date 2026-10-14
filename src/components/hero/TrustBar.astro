@@ -2,10 +2,10 @@
 const items = ['Free Worldwide Shipping over $100', '2-Year Warranty', '30-Day Risk-Free Trial'];
 ---
 
-<ul class="m-0 flex max-w-md list-none flex-wrap gap-x-6 gap-y-3 border-t border-white/10 p-0 pt-8 text-xs text-muted">
+<ul class="m-0 flex list-none flex-col gap-2 p-0 text-xs tracking-widest text-muted uppercase">
 	{
 		items.map((item) => (
-			<li class="flex items-center gap-2">
+			<li class="flex items-center gap-2 md:justify-end">
 				<span class="size-1 rounded-full bg-accent-soft" aria-hidden="true" />
 				{item}
 			</li>

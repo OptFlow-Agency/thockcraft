@@ -5,20 +5,22 @@ import Hero from '../components/hero/Hero.astro';
 import Cinematic from '../components/cinematic/Cinematic.astro';
 import Anatomy from '../components/anatomy/Anatomy.astro';
 import SoundKeyboard from '../components/keyboard/SoundKeyboard.astro';
-import Products from '../components/products/Products.astro';
+import Experience from '../components/experience/Experience.astro';
 import WhyChooseUs from '../components/why/WhyChooseUs.astro';
 import Testimonials from '../components/testimonials/Testimonials.astro';
 import Footer from '../components/footer/Footer.astro';
 ---
 
 <Layout title="Thockcraft | Craft Your Ultimate Typing Experience">
-	<Header />
-	<main>
+	<div class="hero-bg flex min-h-svh flex-col pt-20">
+		<Header />
 		<Hero />
+	</div>
+	<main>
 		<Cinematic />
 		<Anatomy />
 		<SoundKeyboard />
-		<Products />
+		<Experience />
 		<WhyChooseUs />
 		<Testimonials />
 	</main>

@@ -1,28 +1,54 @@
 ---
 import HeroHeading from "./HeroHeading.astro";
-import HeroActions from "./HeroActions.astro";
 import TrustBar from "./TrustBar.astro";
 import HeroImage from "./HeroImage.astro";
 import ScrollCue from "./ScrollCue.astro";
 ---
 
-<section class="px-page relative grid min-h-[calc(100svh-13rem)] grid-cols-1 items-center gap-8 overflow-x-clip pt-4 pb-4 md:grid-cols-2 md:gap-8">
-  <div class="relative z-10 flex flex-col items-start gap-8">
-    <HeroHeading />
-    <p
-      class="motion-safe:animate-fade-up m-0 max-w-[34rem] text-[0.95rem] leading-7 text-white/80"
-      style="animation-delay: 650ms"
-    >
-      Precision-engineered mechanical keyboards, custom switches, and premium
-      keycaps designed for everybody.
-    </p>
-    <div class="motion-safe:animate-fade-up" style="animation-delay: 800ms">
-      <HeroActions />
+<section
+  class="px-page relative flex flex-1 flex-col items-center justify-center overflow-x-clip pt-4 pb-10 md:pb-0"
+  data-hero
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 [[data-hero-active]_&]:opacity-100"
+    style="background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 50%), rgb(201 162 122 / 0.14), transparent 70%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative flex w-full flex-col items-center">
+  <HeroHeading />
+  <HeroImage />
+
+  <div class="relative z-10 mt-12 flex w-full flex-col gap-10 md:absolute md:inset-x-[max(2rem,calc((100%-96rem)/2))] md:top-[19vw] md:mt-0 md:w-auto md:flex-row md:items-start md:justify-between">
+    <div class="motion-safe:animate-fade-up max-w-60 text-xs leading-6 tracking-widest text-fg/80 uppercase" style="animation-delay: 1050ms">
+      <p class="m-0 mb-3 flex items-center gap-2 text-accent-soft"><span class="size-1.5 rounded-full bg-accent-soft"></span>Experience</p>
+      <p class="m-0">
+        Precision-engineered mechanical keyboards, custom switches, and premium keycaps designed for everybody.
+      </p>
     </div>
-    <div class="motion-safe:animate-fade-up" style="animation-delay: 950ms">
+    <div class="motion-safe:animate-fade-up md:max-w-52 md:text-right" style="animation-delay: 1200ms">
       <TrustBar />
     </div>
   </div>
-  <HeroImage />
+  </div>
+
   <ScrollCue />
 </section>
+
+<script>
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  if (hero && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      hero.style.setProperty("--mx", `${x * 100}%`);
+      hero.style.setProperty("--my", `${y * 100}%`);
+      hero.dataset.heroActive = "";
+    });
+    hero.addEventListener("pointerleave", () => {
+      delete hero.dataset.heroActive;
+    });
+  }
+</script>

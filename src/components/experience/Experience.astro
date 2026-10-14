@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import desk from '../../assets/keyboard-on-desk.jpg';
+import Button from '../Button.astro';
+---
+
+<section class="force-dark relative isolate flex min-h-svh items-center overflow-hidden text-ink" aria-labelledby="experience-heading">
+	<Image src={desk} alt="" width={1946} class="absolute inset-0 -z-20 h-full w-full object-cover object-center" loading="lazy" aria-hidden="true" />
+	<!-- Overlay keeps the copy readable over the photo -->
+	<div class="absolute inset-0 -z-10 bg-[#12181e]/75" aria-hidden="true"></div>
+	<div class="absolute inset-0 -z-10 bg-linear-to-t from-[#12181e] via-transparent to-[#12181e]/60" aria-hidden="true"></div>
+
+	<div class="px-page relative w-full py-24 text-center">
+		<h2 id="experience-heading" class="mx-auto m-0 max-w-3xl text-[clamp(1.75rem,5vw,4rem)] leading-[1.1] font-bold tracking-tight text-balance" data-reveal>
+			Make every keystroke a good one.
+		</h2>
+		<p class="mx-auto mt-6 max-w-xl text-base leading-8 text-ink/80 sm:text-lg" data-reveal data-reveal-delay="150">
+			Take your time, try the switches, and find the board that feels right under your hands. We're here to make
+			your typing experience something you look forward to every day.
+		</p>
+		<div class="mt-10 flex justify-center" data-reveal data-reveal-delay="300">
+			<Button href="#switches" variant="secondary">Find your feel</Button>
+		</div>
+	</div>
+</section>

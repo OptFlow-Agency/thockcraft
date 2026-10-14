@@ -3,8 +3,24 @@ import Logo from './Logo.astro';
 import Nav from './Nav.astro';
 ---
 
-<header class="px-page relative z-40 flex h-20 items-center justify-between" data-header>
+<header class="px-page fixed inset-x-0 top-0 z-40 flex h-20 items-center justify-between border-b border-transparent transition-[height,background-color,border-color] duration-300 ease-out data-[scrolled]:h-14 data-[scrolled]:border-fg/10 data-[scrolled]:bg-bg/90" data-header>
 	<Logo />
+	<div class="flex items-center gap-2 md:gap-7">
+	<Nav />
+	<button
+		type="button"
+		class="flex size-10 items-center justify-center rounded-full hover:bg-fg/10"
+		aria-label="Switch to light mode"
+		data-theme-toggle
+	>
+		<svg class="hidden [[data-theme=light]_&]:block" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+			<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+		</svg>
+		<svg class="[[data-theme=light]_&]:hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+			<circle cx="12" cy="12" r="4"></circle>
+			<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+		</svg>
+	</button>
 	<button
 		type="button"
 		class="-mr-2 flex size-10 items-center justify-center md:hidden"
@@ -18,8 +34,15 @@ import Nav from './Nav.astro';
 			<path class="hidden [[aria-expanded=true]_&]:block" d="M6 6l12 12M18 6L6 18"></path>
 		</svg>
 	</button>
-	<Nav />
+	</div>
 </header>
+
+<script>
+	const header = document.querySelector<HTMLElement>('[data-header]');
+	const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+	onScroll();
+	window.addEventListener('scroll', onScroll, { passive: true });
+</script>
 
 <script>
 	const toggles = document.querySelectorAll<HTMLButtonElement>('[data-nav-toggle]');
@@ -33,4 +56,22 @@ import Nav from './Nav.astro';
 			toggles.forEach((t) => t.setAttribute('aria-expanded', String(open)));
 		}),
 	);
+</script>
+
+<script>
+	const root = document.documentElement;
+	const themeToggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+	const sync = () => {
+		const light = root.dataset.theme === 'light';
+		themeToggle?.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+	};
+	sync();
+	themeToggle?.addEventListener('click', () => {
+		const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+		root.dataset.theme = next;
+		try {
+			localStorage.setItem('theme', next);
+		} catch {}
+		sync();
+	});
 </script>

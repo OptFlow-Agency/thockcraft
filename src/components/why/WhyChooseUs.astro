@@ -2,17 +2,44 @@
 import { features } from '../../data/features';
 ---
 
-<section class="px-page bg-white pb-24 text-neutral-900" aria-labelledby="why-heading">
-	<h2 id="why-heading" data-reveal class="m-0 mb-12 text-3xl font-bold">Why Choose Us</h2>
-	<dl class="m-0 grid gap-x-16 gap-y-10 md:grid-cols-2">
+<section class="px-page bg-panel py-24 text-panel-fg" aria-labelledby="why-heading">
+	<h2 id="why-heading" data-reveal class="m-0 mb-16 text-3xl font-bold">Why Choose Us</h2>
+	<ol class="m-0 flex list-none flex-col gap-12 p-0">
 		{
-			features.map(({ title, description }, i) => (
-				<div class="border-t border-neutral-200 pt-6" data-reveal data-reveal-delay={(i % 2) * 120}>
-					<span class="text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>
-					<dt class="mt-2 text-lg font-bold">{title}</dt>
-					<dd class="m-0 mt-2 max-w-md text-sm leading-relaxed text-neutral-600">{description}</dd>
-				</div>
-			))
+			features.map(({ title, description }, i) => {
+				const right = i % 2 === 1;
+				return (
+					<li
+						class:list={[
+							'relative pl-16 md:w-1/2 md:pl-0',
+							right ? 'md:ml-auto md:pl-16' : 'md:pr-16 md:text-right',
+						]}
+						data-reveal
+						data-reveal-delay={120}
+					>
+						<span
+							class:list={[
+								'absolute top-0 left-0 z-10 flex size-10 items-center justify-center rounded-full border-2 border-accent-soft bg-panel text-xs font-bold text-accent-soft',
+								right ? 'md:-translate-x-1/2' : 'md:right-0 md:left-auto md:translate-x-1/2',
+							]}
+							aria-hidden="true"
+						>
+							{String(i + 1).padStart(2, '0')}
+						</span>
+						{i < features.length - 1 && (
+							<span
+								class:list={[
+									'absolute top-10 -bottom-12 left-5 w-0.5 -translate-x-1/2 bg-linear-to-b from-accent-soft to-line',
+									right ? 'md:left-0' : 'md:right-0 md:left-auto md:translate-x-1/2',
+								]}
+								aria-hidden="true"
+							/>
+						)}
+						<h3 class="m-0 pt-1.5 text-lg font-bold">{title}</h3>
+						<p class:list={['m-0 mt-2 max-w-md text-sm leading-relaxed text-subtle', !right && 'md:ml-auto']}>{description}</p>
+					</li>
+				);
+			})
 		}
-	</dl>
+	</ol>
 </section>

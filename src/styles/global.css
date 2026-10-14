@@ -1,13 +1,21 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-bg: #1f1f1f;
-	--color-surface: #0c0c0f;
-	--color-muted: #b5b5b5;
-	--color-accent: #5a3a22;
-	--color-accent-hover: #6d4729;
+	--color-bg: #14191f;
+	--color-fg: #e6e6e6;
+	--color-ink: #e6e6e6;
+	--color-panel: #14191f;
+	--color-panel-fg: #e6e6e6;
+	--color-panel-soft: #2a3239;
+	--color-line: #2a3239;
+	--color-subtle: #a9a597;
+	--color-surface: #070c13;
+	--color-deep: #070c13;
+	--color-muted: #a9a597;
+	--color-accent: #2a3239;
+	--color-accent-hover: #36414a;
 
-	--font-sans: 'Inter', system-ui, sans-serif;
+	--font-sans: 'Outfit', sans-serif;
 	--animate-float: float 6s ease-in-out infinite;
 	--animate-hero-in: hero-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 
@@ -81,8 +89,65 @@
 		}
 	}
 
-	--color-accent-soft: #c9a27a;
-	--font-mono: 'Geist Mono', ui-monospace, monospace;
+	--color-accent-soft: #e6e6e6;
+	--font-mono: 'Outfit', sans-serif;
+}
+
+/* Light theme overrides; dark is the default. Cinematic, switch tester and footer stay dark in both. */
+:root {
+	color-scheme: dark;
+	--hero-from: #070c13;
+	--hero-glow: rgb(42 50 57 / 0.85);
+	--hero-to: var(--color-bg);
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+	--color-bg: #ffffff;
+	--color-fg: #14191f;
+	--color-muted: #5f594b;
+	--color-panel: #ffffff;
+	--color-panel-fg: #14191f;
+	--color-panel-soft: #e6e6e6;
+	--color-line: #e6e6e6;
+	--color-subtle: #5f594b;
+	--color-accent-soft: #12181e;
+	--color-accent: #12181e;
+	--color-accent-hover: #232c35;
+	--hero-from: #ffffff;
+	--hero-to: #ffffff;
+	--hero-glow: transparent;
+}
+
+/* Sections that stay dark in both themes keep the dark token values */
+.force-dark {
+	--color-fg: #e6e6e6;
+	--color-muted: #a9a597;
+	--color-subtle: #a9a597;
+	--color-accent-soft: #e6e6e6;
+	--color-accent: #2a3239;
+	--color-accent-hover: #36414a;
+}
+
+/* Second section and switch tester: light grey in light mode instead of the dark cinematic look */
+:root[data-theme='light'] .cinematic,
+:root[data-theme='light'] .switch-lab {
+	background: #cdcdcb;
+	--color-ink: #14191f;
+	--color-fg: #14191f;
+	--color-muted: #5f594b;
+	--color-subtle: #5f594b;
+	--color-accent-soft: #12181e;
+	--color-accent: #12181e;
+	--color-accent-hover: #232c35;
+}
+:root[data-theme='light'] .cin-overlay {
+	display: none;
+}
+
+.hero-bg {
+	background:
+		radial-gradient(ellipse 80% 70% at 70% 45%, var(--hero-glow), transparent 70%),
+		linear-gradient(to bottom, var(--hero-from), var(--hero-to));
 }
 
 @layer base {
@@ -90,7 +155,7 @@
 		@apply bg-accent text-white;
 	}
 	html {
-		@apply bg-bg text-white;
+		@apply bg-bg text-fg;
 		overflow-x: clip;
 	}
 	body {

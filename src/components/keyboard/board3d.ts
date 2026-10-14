@@ -278,7 +278,7 @@ export async function createBoard3D(container: HTMLElement, { onPointerPress }: 
 	g.fillStyle = grad;
 	g.fillRect(0, 0, 128, 128);
 	const shadow = new Mesh(
-		new PlaneGeometry(size.x * 1.35, size.z * 1.9),
+		new PlaneGeometry(size.x * 1.2, size.z * 1.3),
 		new MeshBasicMaterial({ map: new CanvasTexture(shadowCanvas), transparent: true, depthWrite: false }),
 	);
 	shadow.rotation.x = -Math.PI / 2;

@@ -33,19 +33,14 @@ const isInteractive = (el: EventTarget | null) =>
 	el instanceof Element && !!el.closest('button, a, input, select, textarea, [role="radio"], [contenteditable]');
 
 export function initSoundKeyboard(root: HTMLElement) {
-	const board = root.querySelector<HTMLElement>('[data-board]');
 	const stage = root.querySelector<HTMLElement>('[data-stage]');
-	const board2d = root.querySelector<HTMLElement>('[data-board2d]');
 	const board3dEl = root.querySelector<HTMLElement>('[data-board3d]');
 	const themesEl = root.querySelector<HTMLElement>('[data-themes]');
 	const status = root.querySelector<HTMLElement>('[data-status]');
 	const volume = root.querySelector<HTMLInputElement>('[data-volume]');
 	const mute = root.querySelector<HTMLButtonElement>('[data-mute]');
 	const radios = [...root.querySelectorAll<HTMLInputElement>('input[name="switch"]')];
-	if (!board || !stage) return;
-
-	const keyEls = new Map<string, HTMLElement>();
-	board.querySelectorAll<HTMLElement>('[data-code]').forEach((el) => keyEls.set(el.dataset.code!, el));
+	if (!stage) return;
 
 	const synth = new KeySynth();
 	let profile = switches.find((s) => s.id === read(STORE.switch)) ?? switches.find((s) => s.id === defaultSwitchId)!;
@@ -107,12 +102,10 @@ export function initSoundKeyboard(root: HTMLElement) {
 		synth.play(profile.sound, code, kind);
 	};
 
-	// The 3D board replaces the 2D one when WebGL and the model are available (see below)
+	// Set once the 3D board has loaded (see below)
 	let view3d: Board3D | null = null;
 
 	const setVisual = (code: string, pressed: boolean) => {
-		const el = keyEls.get(code);
-		if (el) pressed ? el.setAttribute('data-pressed', '') : el.removeAttribute('data-pressed');
 		view3d?.setPressed(code, pressed);
 	};
 
@@ -157,13 +150,6 @@ export function initSoundKeyboard(root: HTMLElement) {
 		if (press(code)) pointers.set(pointerId, code);
 	};
 
-	board.addEventListener('pointerdown', (e) => {
-		const el = (e.target as Element).closest<HTMLElement>('[data-code]');
-		if (!el) return;
-		e.preventDefault(); // no focus, no text selection
-		pointerPress(el.dataset.code!, e.pointerId);
-	});
-
 	const endPointer = (e: PointerEvent) => {
 		const code = pointers.get(e.pointerId);
 		if (code === undefined) return;
@@ -175,7 +161,6 @@ export function initSoundKeyboard(root: HTMLElement) {
 
 	// --- 3D board ------------------------------------------------------------------------------
 	// Loaded lazily (Three.js + the model are ~1 MB) once the section is near the screen.
-	// If WebGL or the model fails, the 2D board simply stays.
 	const applyTheme = (id: string) => {
 		const theme = keycapThemes.find((t) => t.id === id) ?? keycapThemes.find((t) => t.id === defaultThemeId)!;
 		view3d?.setTheme(theme);
@@ -187,8 +172,7 @@ export function initSoundKeyboard(root: HTMLElement) {
 		if (id) applyTheme(id);
 	});
 
-	const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-	if (board3dEl && board2d && !saveData) {
+	if (board3dEl) {
 		const loader = new IntersectionObserver(
 			([entry]) => {
 				if (!entry.isIntersecting) return;
@@ -196,15 +180,13 @@ export function initSoundKeyboard(root: HTMLElement) {
 				import('./board3d')
 					.then((m) => m.createBoard3D(board3dEl, { onPointerPress: pointerPress }))
 					.then((view) => {
-						if (!view) return;
+						if (!view) throw new Error('3D board unavailable');
 						view3d = view;
 						applyTheme(read(STORE.theme) ?? defaultThemeId);
 						if (themesEl) themesEl.hidden = false;
 						down.forEach((code) => view.setPressed(code, true));
-						board2d.hidden = true;
-						board3dEl.hidden = false;
 					})
-					.catch(() => {});
+					.catch(() => setStatus('The 3D keyboard could not be loaded. Reload the page to try again.'));
 			},
 			{ rootMargin: '600px 0px' },
 		);

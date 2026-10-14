@@ -11,7 +11,7 @@ const [labelX, elbowX] = [1270, 1180];
 ---
 
 <section
-	class="px-page relative bg-white text-neutral-900 lg:h-[500svh]"
+	class="px-page relative bg-panel text-panel-fg lg:h-[500svh]"
 	aria-label="Keyboard anatomy"
 	data-anatomy
 	data-steps={total}
@@ -30,7 +30,7 @@ const [labelX, elbowX] = [1270, 1180];
 							</div>
 						))
 					}
-					<svg viewBox={`0 0 ${FRAME.width} ${FRAME.height}`} class="pointer-events-none absolute inset-0 hidden h-full w-full text-accent lg:block" fill="none" aria-hidden="true">
+					<svg viewBox={`0 0 ${FRAME.width} ${FRAME.height}`} class="pointer-events-none absolute inset-0 hidden h-full w-full text-accent-soft lg:block" fill="none" aria-hidden="true">
 						{
 							parts.map(({ labelY, target: [x, y], step }) => (
 								<g>
